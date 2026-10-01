@@ -37,11 +37,13 @@ class Config:
         recipients_raw = _require("REPORT_RECIPIENTS")
         self.recipients = [r.strip() for r in recipients_raw.split(",") if r.strip()]
 
-        self.lookback_days = int(os.environ.get("LOOKBACK_DAYS", "7"))
+        self.lookback_days = int(os.environ.get("LOOKBACK_DAYS", "60"))
         self.preorder_tag = os.environ.get("PREORDER_TAG", "preorder")
-        # SKUs affecting this many distinct orders (or more) are excluded —
-        # treated as an already-known, larger-scale issue rather than
-        # something this report needs to surface.
+        # Product families (grouped by SKU-prefix + name-base, so size/color
+        # variants of the same product count together) affecting this many
+        # distinct orders or more are excluded — treated as an
+        # already-known, larger-scale issue rather than something this
+        # report needs to surface.
         self.max_orders_per_sku = int(os.environ.get("MAX_ORDERS_PER_SKU", "5"))
 
         self.shiphero_auth_url = "https://public-api.shiphero.com/auth/refresh"
