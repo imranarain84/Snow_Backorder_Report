@@ -7,6 +7,7 @@ FIELDNAMES = [
     "order_date",
     "customer_email",
     "sku",
+    "sku_group",
     "product_name",
     "qty_backordered",
     "orders_affected_for_sku",
